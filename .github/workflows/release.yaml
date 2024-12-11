@@ -34,5 +34,5 @@ jobs:
 
       - name: Publish Release
         run: |
-          echo "Publishing release for version $VERSION_NAME..."
+          echo "Updated Publishing release for version $VERSION_NAME..."
           # Add your publishing logic here
