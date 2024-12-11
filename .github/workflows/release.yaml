@@ -6,6 +6,7 @@ on:
 jobs:
   run-on-release:
     runs-on: ubuntu-latest
+    if: github.repository == 'ttypic/git-playground'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
