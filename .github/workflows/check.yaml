@@ -1,0 +1,16 @@
+# Use it with always suggest updating pull request branches
+name: Github branches consistency check
+
+on: pull_request
+
+jobs:
+  fail-on-merge-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for merge commits
+        shell: bash
+        run: |
+          MERGE_COMMITS=$(git log --merges origin/${{github.base_ref}}..refs/remotes/pull/${{github.event.pull_request.number}}/merge^2 --)
+          if [ -n "$MERGE_COMMITS" ]; then
+            exit 1
+          fi
