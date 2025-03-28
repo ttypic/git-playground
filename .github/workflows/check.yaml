@@ -9,11 +9,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 20
 
       - name: Check for merge commits
         shell: bash
         run: |
-          MERGE_COMMITS=$(git log --merges origin/${{github.base_ref}}..HEAD --)
+          MERGE_COMMITS=$(git log --oneline --merges ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} --)
           if [ -n "$MERGE_COMMITS" ]; then
             echo $MERGE_COMMITS
             exit 1
