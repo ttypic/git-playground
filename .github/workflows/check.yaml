@@ -13,7 +13,8 @@ jobs:
       - name: Check for merge commits
         shell: bash
         run: |
-          MERGE_COMMITS=$(git log --merges origin/${{github.base_ref}}..refs/remotes/pull/${{github.event.pull_request.number}}/merge^2 --)
+          MERGE_COMMITS=$(git log --merges origin/${{github.base_ref}}..HEAD --)
           if [ -n "$MERGE_COMMITS" ]; then
+            echo $MERGE_COMMITS
             exit 1
           fi
